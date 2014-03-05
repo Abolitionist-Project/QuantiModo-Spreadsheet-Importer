@@ -1,0 +1,10 @@
+<?php
+
+	define('MEASUREMENTS_DB_NAME', 'quantimodo');
+	define('MEASUREMENTS_DB_HOST', 'localhost');
+	define('MEASUREMENTS_DB_USER', 'root');
+	define('MEASUREMENTS_DB_PASSWORD', '');
+	define('MEASUREMENTS_TABLE', 'measurements');
+
+	error_reporting(~0);
+?>

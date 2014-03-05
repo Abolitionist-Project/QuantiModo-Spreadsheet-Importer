@@ -1,0 +1,15 @@
+.idea
+.Quantimodo-API.iml
+ShareCache
+database.php
+.htaccess
+!.htaccess.example
+.dropbox
+desktop.ini
+_gsdata_
+
+qm-config.php
+tester-config.php
+config.php
+
+credentials.serializedphp
