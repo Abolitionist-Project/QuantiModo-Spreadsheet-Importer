@@ -1,6 +1,7 @@
 <?php	
 	require_once 'Reader/Reader.php';
 
+	require_once 'Readers/HTMLTableReader.php';
 	require_once 'Readers/CSVReader.php';
 
 	class ReaderManager
@@ -11,7 +12,8 @@
 		{
 			$this->readers = array();
 
-			$this->readers[] = new CSVReader();	// CSVReader has to be the last reader
+			$this->readers[] = new HTMLTableReader();
+			$this->readers[] = new CSVReader();			// CSVReader has to be the last reader
 		}
 
 		public function getDatabaseView($file)
