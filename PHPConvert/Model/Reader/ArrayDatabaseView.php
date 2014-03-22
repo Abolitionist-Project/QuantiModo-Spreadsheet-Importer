@@ -1,12 +1,13 @@
 <?php	
 	class ArrayDatabaseView extends DatabaseView
 	{
+		private $name;
 		private $tableNames;
 		private $tables;
 
 		private $tableCount;
 
-		function __construct($tableNames, $tables) 
+		function __construct($name, $tableNames, $tables) 
 		{
 			if($tableNames == null)
 			{
@@ -17,11 +18,21 @@
 				throw new Exception("No tables were provided");
 			}
 
+			$this->name = $name;
 			$this->tableNames = $tableNames;
 			$this->tables = $tables;
 
 			$this->tableCount = count($tables);
 		}
+
+		/*
+		**	Returns the number of tables in this DatabaseView
+		*/
+		public function getName()
+		{
+			return $this->name;
+		}
+
 
 		/*
 		**	Returns the number of tables in this DatabaseView
@@ -36,7 +47,7 @@
 		*/
 		public function getTableNumber($tableName)
 		{
-			for($i = 0; $i < $tableCount; $i++)
+			for($i = 0; $i < $this->tableCount; $i++)
 			{
 				if($tableName == $this->tableNames[$i])
 				{
@@ -68,7 +79,7 @@
 		{
 			if(is_integer($table))
 			{
-				if($table >= 0 && $table < count($this->tableCount))
+				if($table >= 0 && $table < $this->tableCount)
 				{
 					return true;
 				}
@@ -104,7 +115,7 @@
 			}
 			else
 			{
-				$tablePosition = $this->getTableName($table);
+				$tablePosition = $this->getTableNumber($table);
 				if($tablePosition == -1)
 				{
 					throw new Exception("Table " . $table . " does not exist");
