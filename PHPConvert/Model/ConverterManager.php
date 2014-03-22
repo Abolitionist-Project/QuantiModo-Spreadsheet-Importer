@@ -2,6 +2,7 @@
 	require_once 'Converter.php';
 
 	require_once 'Converters/LittleMindMonitorLiteConverter.php';
+	require_once 'Converters/MedHelperConverter.php';
 	
 	class ConverterManager
 	{	
@@ -11,6 +12,7 @@
 		{
 			$this->converters = array();
 
+			$this->converters[] = new MedHelperConverter();
 			$this->converters[] = new LittleMindMonitorLiteConverter();
 		}
 
