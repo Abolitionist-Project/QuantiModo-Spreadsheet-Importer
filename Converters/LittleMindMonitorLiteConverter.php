@@ -1,16 +1,15 @@
 <?php
 	class LittleMindMonitorLiteConverter extends Converter
 	{
-
 		public function convert($databaseView)
 		{
-			if(!$databaseView->hasTable(0))
+			if(!$databaseView->hasTable("comma_separated"))
 			{
 				return false;
 			}
 
 			// Get the table now that we are sure it exists
-			$table = $databaseView->getTable(0);
+			$table = $databaseView->getTable("comma_separated");
 
 			// Get the fields we need
 			$timestampField = $table->getFieldNumber("TimeStamp");
@@ -25,7 +24,7 @@
 			// If one of our fields are missing we can't handle this file
 			if($timestampField === false || $attentionField == false || $meditationField == false)
 			{
-				return null;
+				return false;
 			}
 
 			// These arrays hold our measurements
