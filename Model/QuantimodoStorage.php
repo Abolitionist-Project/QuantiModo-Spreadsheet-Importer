@@ -221,15 +221,15 @@
 				if(!array_key_exists($measurementSet->sourceName, $this->sources))
 				{
 					echo " [INFO] Creating source " . $measurementSet->sourceName . "\n";
-					$sourceId = $this->storeSource($measurementSet->sourceName);
-					if($sourceId == -1)
+					$sourceName = $this->storeSource($measurementSet->sourceName);
+					if($sourceName == -1)
 					{
 						echo " [ERROR] Can't create source";
 						continue;
 					}
 					continue;
 				}
-				$sourceId = $this->sources[$measurementSet->sourceName];
+				$sourceName = $this->sources[$measurementSet->sourceName];
 
 				// Variable for this set
 				if(!array_key_exists($measurementSet->variableName, $this->variables))
@@ -270,21 +270,11 @@
 				// Loop through all measurements to store them
 				foreach($measurementSet->measurements as $measurement)
 				{
-					// If this measurement is more than a week in the future throw an error
-					if($measurement->timestamp > $timestampUpperLimit)
-					{
-						echo " [WARNING] timestamp too far in future: " . $timestamp . "\n";
-						continue;
-					}
-					if($measurement->timestamp < $timestampLowerLimit)
-					{
-						echo " [WARNING] timestamp too far in past: " . $timestamp . "\n";
-						continue;
-					}
+
 
 					$q->bindParam(":user", $userId);
 					$q->bindParam(":variable", $variableId);
-					$q->bindParam(":source", $sourceId);
+					$q->bindParam(":source", $sourceName);
 					$q->bindParam(":unit", $unitId);
 					$q->bindValue(":timestamp", $measurement->timestamp / 60);
 					$q->bindParam(":value", $measurement->value);
